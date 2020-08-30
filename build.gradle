@@ -98,11 +98,7 @@ dependencies {
 
     compile fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
-	//compile files("Hwyla-forge-1.10.10-B77_1.16.1.jar")
-
-    // https://maven.tehnut.info/mcp/mobius/waila/Hwyla/1.10.10-B77_1.16.1/Hwyla-1.10.10-B77_1.16.1.pom
-    // https://maven.tehnut.info/mcp/mobius/waila/Hwyla/1.10.10-B77_1.16.1/forge-1.10.10-B77_1.16.1.pom'
-    // Compile against the Hwyla API, but do not include it at runtime
+    // We need to use the full jar
     compileOnly fg.deobf("mcp.mobius.waila:Hwyla:1.10.10-B77_1.16.1")
     // At runtime, use the full Hwyla jar
     runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:1.10.10-B77_1.16.1")
