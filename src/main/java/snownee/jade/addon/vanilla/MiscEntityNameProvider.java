@@ -28,7 +28,7 @@ public class MiscEntityNameProvider implements IEntityComponentProvider {
         if (!tooltip.isEmpty() || shouldExclude(accessor.getEntity(), config)) {
             return;
         }
-        tooltip.add(new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getEntityName(), accessor.getEntity().getDisplayName().getFormattedText())));
+        tooltip.add(new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getEntityName(), accessor.getEntity().getDisplayName().getString())));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class MiscEntityNameProvider implements IEntityComponentProvider {
         if (entity instanceof ArmorStandEntity) {
             return false;
         }
-        return entity instanceof LivingEntity || entity instanceof AbstractMinecartEntity || entity instanceof HangingEntity || entity instanceof ItemFrameEntity;
+        return entity instanceof LivingEntity || entity instanceof AbstractMinecartEntity || entity instanceof HangingEntity;
     }
 
 }

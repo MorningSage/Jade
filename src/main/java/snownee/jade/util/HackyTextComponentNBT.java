@@ -1,5 +1,6 @@
 package snownee.jade.util;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.text.ITextComponent;
 

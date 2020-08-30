@@ -19,19 +19,17 @@ public class ArmorStandProvider implements IEntityComponentProvider {
 
     @Override
     public void appendBody(List<ITextComponent> tooltip, IEntityAccessor accessor, IPluginConfig config) {
-        if (!config.get(JadePlugin.ARMOR_STAND)) {
-            return;
-        }
+        if (!config.get(JadePlugin.ARMOR_STAND)) return;
+
         ArmorStandEntity entity = (ArmorStandEntity) accessor.getEntity();
-        IItemHandler itemHandler = entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
-        if (itemHandler == null) {
-            return;
-        }
-        for (int i = itemHandler.getSlots() - 1; i >= 0; i--) {
-            ItemStack stack = itemHandler.getStackInSlot(i);
-            if (!stack.isEmpty())
-                tooltip.add(Renderables.of(Renderables.item(stack), Renderables.offsetText(stack.getDisplayName(), 0, 4)));
-        }
+        entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+            .ifPresent(itemHandler -> {
+                for (int i = itemHandler.getSlots() - 1; i >= 0; i--) {
+                    ItemStack stack = itemHandler.getStackInSlot(i);
+                    if (!stack.isEmpty())
+                        tooltip.add(Renderables.of(Renderables.item(stack), Renderables.offsetText(stack.getDisplayName(), 0, 4)));
+                }
+            });
     }
 
 }

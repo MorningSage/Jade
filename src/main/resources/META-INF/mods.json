@@ -1,0 +1,39 @@
+{
+  "modLoader": "javafml",
+  "loaderVersion": "[32,)",
+  "displayURL": "https://minecraft.curseforge.com/projects/jade",
+  "authors": "Snownee, MorningSage",
+  "mods": [
+    {
+      "modId": "jade",
+      "version": "${version}",
+      "displayName": "Jade",
+      "description": "HWYLA addons"
+    }
+  ],
+  "dependencies": {
+    "waila": [
+      {
+        "modId": "forge",
+        "mandatory": true,
+        "versionRange": "[33.0.0,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "mandatory": true,
+        "versionRange": "[1.16.1,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "hwyla",
+        "mandatory": true,
+        "versionRange": "[1.10.8, 2)",
+        "ordering": "BEFORE",
+        "side": "BOTH"
+      }
+    ]
+  }
+}

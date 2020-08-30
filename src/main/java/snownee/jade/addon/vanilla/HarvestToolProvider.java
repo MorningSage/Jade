@@ -14,9 +14,11 @@ public class HarvestToolProvider implements IComponentProvider {
 
     @Override
     public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-        if (!config.get(JadePlugin.HARVEST_TOOL)) {
-            return;
-        }
+        // ToDo...
+
+        //if (!config.get(JadePlugin.HARVEST_TOOL)) {
+        //    return;
+        //}
     }
 
 }

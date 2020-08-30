@@ -2,6 +2,7 @@ package snownee.jade.client;
 
 import java.awt.Rectangle;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import mcp.mobius.waila.api.event.WailaRenderEvent;
 import mcp.mobius.waila.api.impl.config.PluginConfig;
 import net.minecraft.block.BlockState;
@@ -32,14 +33,13 @@ public final class ClientHandler {
 
     @SubscribeEvent
     public static void post(WailaRenderEvent.Post event) {
-        if (!PluginConfig.INSTANCE.get(JadePlugin.BREAKING_PROGRESS)) {
-            return;
-        }
+        if (!PluginConfig.INSTANCE.get(JadePlugin.BREAKING_PROGRESS)) return;
+
         Minecraft mc = Minecraft.getInstance();
         PlayerController playerController = mc.playerController;
-        if (playerController == null || !playerController.getIsHittingBlock()) {
-            return;
-        }
+
+        if (playerController == null || !playerController.getIsHittingBlock() || mc.world == null || mc.player == null) return;
+
         BlockState state = mc.world.getBlockState(playerController.currentBlock);
         boolean canHarvest = ForgeHooks.canHarvestBlock(state, mc.player, mc.world, playerController.currentBlock);
         int color = canHarvest ? 0x88FFFFFF : 0x88FF4444;
@@ -47,7 +47,7 @@ public final class ClientHandler {
         float progress = state.getPlayerRelativeBlockHardness(mc.player, mc.player.world, playerController.currentBlock);
         progress = playerController.curBlockDamageMP + mc.getRenderPartialTicks() * progress;
         progress = MathHelper.clamp(progress, 0, 1);
-        AbstractGui.fill(rect.x + 1, rect.height + 1, rect.x + 1 + (int) (rect.width * progress), rect.height + 2, color);
+        AbstractGui.fill(new MatrixStack(), rect.x + 1, rect.height + 1, rect.x + 1 + (int) (rect.width * progress), rect.height + 2, color);
     }
 
 }

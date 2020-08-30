@@ -34,18 +34,18 @@ public class AccurateNameProvider implements IComponentProvider {
             try {
                 ITextComponent name = CACHE.get(accessor.getBlock(), () -> {
                     ResourceLocation trappedName = accessor.getBlock().getRegistryName();
-                    if (trappedName.getPath().startsWith("trapped_")) {
+                    if (trappedName != null && trappedName.getPath().startsWith("trapped_")) {
                         ResourceLocation chestName = new ResourceLocation(trappedName.getNamespace(), trappedName.getPath().substring(8));
                         Block block = ForgeRegistries.BLOCKS.getValue(chestName);
                         if (block != null) {
-                            return block.getNameTextComponent();
+                            return block.getTranslatedName();
                         }
                     }
                     return DEFAULT_NAME;
                 });
                 tooltip.clear();
-                tooltip.add(new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getBlockName(), name.getFormattedText())));
-            } catch (Exception e) {}
+                tooltip.add(new StringTextComponent(String.format(Waila.CONFIG.get().getFormatting().getBlockName(), name.getString())));
+            } catch (Exception ignored) {}
             return;
         }
         if (!tooltip.isEmpty() && config.get(JadePlugin.ACCURATE_NAME)) {

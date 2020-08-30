@@ -4,13 +4,13 @@ loaderVersion="[31,)"
 modId="jade"
 version="${file.jarVersion}"
 displayName="Jade"
-authors="Snownee"
+authors="Snownee, MorningSage"
 displayURL="https://minecraft.curseforge.com/projects/jade"
 description="HWYLA addons"
 
-[[dependencies.everpotion]]
-    modId="hwyla"
+[[dependencies.jade]]
+    modId="waila"
     mandatory=true
-    versionRange="[1.10.8, 2)"
+    versionRange="[1.10.10-B77_1.16.1,)"
     ordering="BEFORE"
     side="BOTH"

@@ -2,6 +2,7 @@ package snownee.jade;
 
 import mcp.mobius.waila.api.RenderableTextComponent;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
@@ -21,10 +22,16 @@ public final class Renderables {
     public static RenderableTextComponent item(ItemStack stack) {
         if (!stack.isEmpty()) {
             CompoundNBT tag = new CompoundNBT();
-            tag.putString("id", stack.getItem().getRegistryName().toString());
+            ResourceLocation resourceLocation = stack.getItem().getRegistryName();
+            if (resourceLocation != null) {
+                tag.putString("id", stack.getItem().getRegistryName().toString());
+            } else {
+                tag.putString("id", Items.AIR.getRegistryName().toString());
+            }
             tag.putInt("count", stack.getCount());
-            if (stack.hasTag())
+            if (stack.hasTag()) {
                 tag.putString("nbt", stack.getTag().toString());
+            }
             return new RenderableTextComponent(ITEM, tag);
         } else {
             return spacer(18, 0);
@@ -32,7 +39,7 @@ public final class Renderables {
     }
 
     public static RenderableTextComponent offsetText(ITextComponent s, int x, int y) {
-        return offsetText(s.getFormattedText(), x, y);
+        return offsetText(s.getString(), x, y);
     }
 
     public static RenderableTextComponent offsetText(String s, int x, int y) {
