@@ -21,20 +21,35 @@ public class BreedingProvider implements IEntityComponentProvider, IServerDataPr
 
     @Override
     public void appendBody(List<ITextComponent> tooltip, IEntityAccessor accessor, IPluginConfig config) {
-        if (!config.get(JadePlugin.MOB_BREEDING) || !accessor.getServerData().contains("BreedingCD", Constants.NBT.TAG_INT)) {
+        if (!config.get(JadePlugin.MOB_BREEDING)) {
             return;
         }
-        int time = accessor.getServerData().getInt("BreedingCD");
-        if (time > 0) {
-            tooltip.add(new TranslationTextComponent("jade.mobbreeding.time", time / 20));
+
+        if (accessor.getServerData().contains("BreedingCD", Constants.NBT.TAG_INT)) {
+            int time = accessor.getServerData().getInt("BreedingCD");
+            if (time > 0) {
+                tooltip.add(new TranslationTextComponent("jade.mobbreeding.time", time / 20));
+            }
+        }
+
+        if (accessor.getServerData().contains("InLoveCD", Constants.NBT.TAG_INT)) {
+            int inLoveCD = accessor.getServerData().getInt("InLoveCD");
+            if (inLoveCD > 0) {
+                tooltip.add(new TranslationTextComponent("jade.mobbreeding.inlove", inLoveCD / 20));
+            }
         }
     }
 
     @Override
     public void appendServerData(CompoundNBT tag, ServerPlayerEntity player, World world, Entity entity) {
-        int time = ((AnimalEntity) entity).getGrowingAge();
-        if (time > 0) {
-            tag.putInt("BreedingCD", time);
+        int breedingCD = ((AnimalEntity) entity).getGrowingAge();
+        if (breedingCD > 0) {
+            tag.putInt("BreedingCD", breedingCD);
+        }
+
+        int inLoveCD = ((AnimalEntity) entity).inLove;
+        if (inLoveCD > 0) {
+            tag.putInt("InLoveCD", inLoveCD);
         }
     }
 }

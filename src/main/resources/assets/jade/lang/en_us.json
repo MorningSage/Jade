@@ -14,6 +14,7 @@
   "jade.mobgrowth.time": "Growing time: %ds",
   "config.waila.plugin_jade.mob_breeding": "Mob Breeding",
   "jade.mobbreeding.time": "Breeding CD: %ds",
+  "jade.mobbreeding.inlove": "In Love CD: %ds",
   "config.waila.plugin_jade.brewing_stand": "Brewing Stand",
   "jade.brewingStand.time": "Time: %ds",
   "jade.brewingStand.fuel": "Fuel: %d",
